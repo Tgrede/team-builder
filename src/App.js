@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import Form from './Form'
+import Member from './Member'
+import styled from 'styled-components'
 
 const initialFormValues = {
   name: '',
@@ -7,7 +9,7 @@ const initialFormValues = {
   role: ''
 }
 
-function App() {
+export default function App() {
   const [teamList, setTeamList] = useState([])
   const [values, setValues] = useState(initialFormValues)
 
@@ -34,11 +36,18 @@ function App() {
   }
 
   return (
-    <div className="App">
-      Hello World
-    <Form values={values} updateForm={updateForm} submitForm={submitForm} />
-    </div>
+    <StyledApp>
+      <h1>Members Form</h1>
+      <Form values={values} updateForm={updateForm} submitForm={submitForm} />
+      {teamList.map(member => {
+        return <Member details={member} />
+      })}
+      <div> <br/></div>
+    </StyledApp>
   );
 }
 
-export default App;
+const StyledApp = styled.div`
+  background-color: #2f376a;
+  color: #b49db1;
+`
